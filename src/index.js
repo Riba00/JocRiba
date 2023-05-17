@@ -39,7 +39,7 @@ class Scene1 extends Phaser.Scene {
         // Place the background image in our game world
         const backgroundImage = this.add.image(0, 0, 'background').setOrigin(0, 0);
         // Scale the image to better match our game's resolution
-        backgroundImage.setScale(2, 0.8);
+        backgroundImage.setScale(4, 1);
         // Add the platform layer as a static group, the player would be able
         // to jump on platforms like world collisions but they shouldn't move
         const platforms = map.createLayer('Platforms', tileset, 0, 200);
@@ -133,7 +133,7 @@ class Scene1 extends Phaser.Scene {
 
         // Add collision between the player and the spikes
         this.physics.add.collider(this.player, this.spikes, playerHit, null, this);
-        this.physics.add.overlap(this.player, this.enemy, playerHit, null, this);
+        this.physics.add.collider(this.player, this.enemy, playerHit, null, this);
 
 
 
@@ -213,10 +213,7 @@ class Scene1 extends Phaser.Scene {
             // otherwise, make them face the other side
             this.player.setFlipX(true);
         }
-
-
     }
-
 }
 
 // Escena 2
@@ -249,7 +246,7 @@ class Scene2 extends Phaser.Scene {
         // Place the background image in our game world
         const backgroundImage = this.add.image(0, 0, 'background2').setOrigin(0, 0);
         // Scale the image to better match our game's resolution
-        backgroundImage.setScale(2, 0.8);
+        backgroundImage.setScale(5, 1);
         // Add the platform layer as a static group, the player would be able
         // to jump on platforms like world collisions but they shouldn't move
         const platforms = map.createLayer('Platforms', tileset, 0, 200);
@@ -346,7 +343,7 @@ class Scene2 extends Phaser.Scene {
 
         // Add collision between the player and the spikes
         this.physics.add.collider(this.player, this.spikes, playerHit, null, this);
-        this.physics.add.overlap(this.player, this.enemy, playerHit, null, this);
+        this.physics.add.collider(this.player, this.enemy, playerHit, null, this);
 
 
 
@@ -382,7 +379,7 @@ class Scene2 extends Phaser.Scene {
             incrementScore(star4);
         }, null, this);
 
-        this.physics.add.overlap(this.player, this.seta, level1ToLevel2, null, this);
+        this.physics.add.overlap(this.player, this.seta, level2ToVictory, null, this);
 
         function incrementScore(sprite) {
             score++;
@@ -393,9 +390,6 @@ class Scene2 extends Phaser.Scene {
 
             sprite.destroy();
         }
-
-
-
     }
 
     update() {
@@ -443,11 +437,48 @@ class Scene3 extends Phaser.Scene {
     }
 
     preload() {
-        // Carga los recursos necesarios para la escena 3
+        this.load.image('background3', 'src/assets/images/cover.png');
+        this.load.image('startButton', 'src/assets/images/startButton.png');
+        this.load.image('aboutButton', 'src/assets/images/aboutButton.png');
     }
 
     create() {
-        // Configuración inicial de la escena 3
+        const backgroundImage = this.add.image(0, 0, 'background3').setOrigin(0, 0);
+        const startButton = this.add.sprite(400, 400, 'startButton').setInteractive();
+        const aboutButton = this.add.sprite(400, 500, 'aboutButton').setInteractive();
+
+        startButton.on('pointerover', () => {
+            startButton.setTexture('startButton');
+            this.input.setDefaultCursor('pointer');
+        });
+
+        startButton.on('pointerout', () => {
+            startButton.setTexture('startButton');
+            this.input.setDefaultCursor('auto');
+        });
+
+        startButton.on('pointerup', () => {
+            this.scene.start('Scene1');
+            lives = 3;
+            score = 0;
+            this.input.setDefaultCursor('auto');
+        });
+
+        aboutButton.on('pointerover', () => {
+            startButton.setTexture('startButton');
+            this.input.setDefaultCursor('pointer');
+        });
+
+        aboutButton.on('pointerout', () => {
+            startButton.setTexture('startButton');
+            this.input.setDefaultCursor('auto');
+        });
+
+        aboutButton.on('pointerup', () => {
+            const url = 'https://github.com/Riba00/JocRiba'; // Reemplaza con la URL que desees abrir
+            window.open(url, '_blank');
+        });
+
     }
 
     update() {
@@ -462,11 +493,70 @@ class Scene4 extends Phaser.Scene {
     }
 
     preload() {
-        // Carga los recursos necesarios para la escena 4
+        this.load.image('background4', 'src/assets/images/gameOver.png');
+        this.load.image('homeButton', 'src/assets/images/homeButton.png');
+
     }
 
     create() {
-        // Configuración inicial de la escena 4
+        const backgroundImage = this.add.image(0, 0, 'background4').setOrigin(0, 0);
+        const homeButton = this.add.sprite(450, 400, 'homeButton').setInteractive();
+
+        homeButton.on('pointerover', () => {
+            homeButton.setTexture('homeButton');
+            this.input.setDefaultCursor('pointer');
+        });
+
+        homeButton.on('pointerout', () => {
+            homeButton.setTexture('homeButton');
+            this.input.setDefaultCursor('auto');
+        });
+
+        homeButton.on('pointerup', () => {
+            this.scene.start('Scene3');
+            this.input.setDefaultCursor('auto');
+        });
+    }
+
+    update() {
+        // Lógica de actualización de la escena 4
+    }
+}
+
+// Escena 4
+class Scene5 extends Phaser.Scene {
+    constructor() {
+        super({key: 'Scene5'});
+    }
+
+    preload() {
+        this.load.image('background5', 'src/assets/images/victory.png');
+        this.load.image('homeButton2', 'src/assets/images/homeButton.png');
+    }
+
+    create() {
+        const backgroundImage = this.add.image(0, 0, 'background5').setOrigin(0, 0);
+        const homeButton2 = this.add.sprite(450, 400, 'homeButton2').setInteractive();
+
+        homeButton2.on('pointerover', () => {
+            homeButton2.setTexture('homeButton2');
+            this.input.setDefaultCursor('pointer');
+        });
+
+        homeButton2.on('pointerout', () => {
+            homeButton2.setTexture('homeButton2');
+            this.input.setDefaultCursor('auto');
+        });
+
+        homeButton2.on('pointerup', () => {
+            this.scene.start('Scene3');
+            this.input.setDefaultCursor('auto');
+        });
+
+
+
+
+
     }
 
     update() {
@@ -479,7 +569,7 @@ const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 645,
-    scene: [Scene1, Scene2, Scene3, Scene4],
+    scene: [Scene3, Scene2, Scene1, Scene4, Scene5],
     physics: {
         default: 'arcade',
         arcade: {
@@ -490,7 +580,9 @@ const config = {
 };
 
 function playerHit(player) {
-    if (player.y+100 < this.enemy.y){
+    if (lives === 1) {
+        this.scene.start('Scene4');
+    } else if (player.y+100 < this.enemy.y){
         this.enemy.destroy()
     } else{
         this.physics.pause();
@@ -523,6 +615,12 @@ function playerHit(player) {
 function level1ToLevel2() {
     if (score >= 3){
         this.scene.start('Scene2');
+    }
+}
+
+function level2ToVictory() {
+    if (score >= 7){
+        this.scene.start('Scene5');
     }
 }
 
