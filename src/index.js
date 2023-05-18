@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import logoImg from './assets/logo.png';
 
 let score = 0;
 let scoreText;
@@ -53,7 +52,7 @@ class Scene1 extends Phaser.Scene {
         const platforms = map.createLayer('Platforms', tileset, 0, 200);
 
 
-        fondo = this.sound.add('fondo',{loop: true});
+        fondo = this.sound.add('fondo',);
         fondo.play();
         coin_sound = this.sound.add('coin_sound',);
         die_sound = this.sound.add('die_sound');
@@ -157,7 +156,7 @@ class Scene1 extends Phaser.Scene {
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, score.toString(), {
+        scoreText = this.add.text(70, 10, score.toString()+'/3', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -185,7 +184,7 @@ class Scene1 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-            scoreText.setText(score.toString());
+            scoreText.setText(score.toString()+ '/3');
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
@@ -374,7 +373,7 @@ class Scene2 extends Phaser.Scene {
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, score.toString(), {
+        scoreText = this.add.text(70, 10, score.toString()+'/7', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -407,7 +406,7 @@ class Scene2 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-            scoreText.setText(score.toString());
+            scoreText.setText(score.toString()+'/7');
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
