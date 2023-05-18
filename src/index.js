@@ -153,7 +153,7 @@ class Scene1 extends Phaser.Scene {
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, (score.toString()+"/3"), {
+        scoreText = this.add.text(70, 10, score.toString()+'/3', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -367,7 +367,7 @@ class Scene2 extends Phaser.Scene {
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, (score.toString()+"/7"), {
+        scoreText = this.add.text(70, 10, score.toString()+'/7', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
