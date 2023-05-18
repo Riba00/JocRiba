@@ -6,6 +6,10 @@ let scoreText;
 let scoreImage
 let lives = 3;
 let livesText;
+let coin_sound
+let die_sound
+let fondo
+let fondo2
 
 
 // Escena 1
@@ -28,6 +32,10 @@ class Scene1 extends Phaser.Scene {
         this.load.tilemapTiledJSON('map', 'src/assets/tilemaps/level1.json');
 
         this.load.spritesheet('star', 'src/assets/images/star.png', {frameWidth: 48, frameHeight: 48})
+
+        this.load.audio('fondo', 'src/assets/audio/fondo.mp3');
+        this.load.audio('coin_sound', 'src/assets/audio/coin.mp3');
+        this.load.audio('die_sound', 'src/assets/audio/die.mp3');
     }
 
     create() {
@@ -43,7 +51,16 @@ class Scene1 extends Phaser.Scene {
         // Add the platform layer as a static group, the player would be able
         // to jump on platforms like world collisions but they shouldn't move
         const platforms = map.createLayer('Platforms', tileset, 0, 200);
-        const stars = map.createLayer('Stars', tileset, 0, 200);
+
+
+        fondo = this.sound.add('fondo',{loop: true});
+        fondo.play();
+        coin_sound = this.sound.add('coin_sound',);
+        die_sound = this.sound.add('die_sound');
+
+
+
+
         // There are many ways to set collision between tiles and players
         // As we want players to collide with all of the platforms, we tell Phaser to
         // set collisions for every tile in our platform layer whose index isn't -1.
@@ -133,7 +150,7 @@ class Scene1 extends Phaser.Scene {
 
         // Add collision between the player and the spikes
         this.physics.add.collider(this.player, this.spikes, playerHit, null, this);
-        this.physics.add.collider(this.player, this.enemy, playerHit, null, this);
+        this.physics.add.overlap(this.player, this.enemy, playerHit, null, this);
 
 
 
@@ -171,7 +188,7 @@ class Scene1 extends Phaser.Scene {
             scoreText.setText(score.toString());
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
-            // sound_coin.play();
+            coin_sound.play();
 
             sprite.destroy();
         }
@@ -235,6 +252,10 @@ class Scene2 extends Phaser.Scene {
         this.load.tilemapTiledJSON('map2', 'src/assets/tilemaps/level2.json');
 
         this.load.spritesheet('star2', 'src/assets/images/star.png', {frameWidth: 48, frameHeight: 48})
+
+        this.load.audio('fondo2', 'src/assets/audio/fondo2.mp3');
+        this.load.audio('coin_sound', 'src/assets/audio/coin.mp3');
+        this.load.audio('die_sound', 'src/assets/audio/die.mp3');
     }
 
     create() {
@@ -250,7 +271,6 @@ class Scene2 extends Phaser.Scene {
         // Add the platform layer as a static group, the player would be able
         // to jump on platforms like world collisions but they shouldn't move
         const platforms = map.createLayer('Platforms', tileset, 0, 200);
-        const stars = map.createLayer('Stars', tileset, 0, 200);
         // There are many ways to set collision between tiles and players
         // As we want players to collide with all of the platforms, we tell Phaser to
         // set collisions for every tile in our platform layer whose index isn't -1.
@@ -276,6 +296,10 @@ class Scene2 extends Phaser.Scene {
 
         this.enemy = this.physics.add.sprite(850, 200, 'enemy')
         this.physics.add.collider(this.enemy, platforms)
+
+        coin_sound = this.sound.add('coin_sound');
+        fondo2 = this.sound.add('fondo2',{loop:true});
+        fondo2.play();
 
 
 
@@ -343,7 +367,7 @@ class Scene2 extends Phaser.Scene {
 
         // Add collision between the player and the spikes
         this.physics.add.collider(this.player, this.spikes, playerHit, null, this);
-        this.physics.add.collider(this.player, this.enemy, playerHit, null, this);
+        this.physics.add.overlap(this.player, this.enemy, playerHit, null, this);
 
 
 
@@ -386,7 +410,7 @@ class Scene2 extends Phaser.Scene {
             scoreText.setText(score.toString());
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
-            // sound_coin.play();
+            coin_sound.play();
 
             sprite.destroy();
         }
@@ -580,11 +604,24 @@ const config = {
 };
 
 function playerHit(player) {
+
     if (lives === 1) {
         this.scene.start('Scene4');
-    } else if (player.y+100 < this.enemy.y){
+        try {
+            fondo.pause()
+        }catch (e){
+
+        }
+        try {
+            fondo2.pause()
+        }catch (e){
+
+        }
+
+    } else if (player.y+50 < this.enemy.y){
         this.enemy.destroy()
     } else{
+        die_sound.play();
         this.physics.pause();
         player.setY(this.player.y - 500);
         lives--
@@ -615,12 +652,14 @@ function playerHit(player) {
 function level1ToLevel2() {
     if (score >= 3){
         this.scene.start('Scene2');
+        fondo.stop();
     }
 }
 
 function level2ToVictory() {
     if (score >= 7){
         this.scene.start('Scene5');
+        fondo2.stop();
     }
 }
 
