@@ -59,8 +59,6 @@ class Scene1 extends Phaser.Scene {
         die_sound = this.sound.add('die_sound');
 
 
-
-
         // There are many ways to set collision between tiles and players
         // As we want players to collide with all of the platforms, we tell Phaser to
         // set collisions for every tile in our platform layer whose index isn't -1.
@@ -83,7 +81,6 @@ class Scene1 extends Phaser.Scene {
 
         this.enemy = this.physics.add.sprite(750, 200, 'enemy')
         this.physics.add.collider(this.enemy, platforms)
-
 
 
         // Add the player to the game world
@@ -151,7 +148,6 @@ class Scene1 extends Phaser.Scene {
         // Add collision between the player and the spikes
         this.physics.add.collider(this.player, this.spikes, playerHit, null, this);
         this.physics.add.overlap(this.player, this.enemy, playerHit, null, this);
-
 
 
         let scoreImage = this.add.image(10, 10, 'star');
@@ -298,9 +294,8 @@ class Scene2 extends Phaser.Scene {
         this.physics.add.collider(this.enemy, platforms)
 
         coin_sound = this.sound.add('coin_sound');
-        fondo2 = this.sound.add('fondo2',{loop:true});
+        fondo2 = this.sound.add('fondo2', {loop: true});
         fondo2.play();
-
 
 
         // Add the player to the game world
@@ -368,7 +363,6 @@ class Scene2 extends Phaser.Scene {
         // Add collision between the player and the spikes
         this.physics.add.collider(this.player, this.spikes, playerHit, null, this);
         this.physics.add.overlap(this.player, this.enemy, playerHit, null, this);
-
 
 
         let scoreImage = this.add.image(10, 10, 'star');
@@ -578,9 +572,6 @@ class Scene5 extends Phaser.Scene {
         });
 
 
-
-
-
     }
 
     update() {
@@ -604,67 +595,66 @@ const config = {
 };
 
 function playerHit(player) {
-
     if (lives === 1) {
         this.scene.start('Scene4');
         try {
             fondo.pause()
-        }catch (e){
+        } catch (e) {
 
         }
         try {
             fondo2.pause()
-        }catch (e){
+        } catch (e) {
 
         }
 
-    } else if (player.y+50 < this.enemy.y){
+    } else if (player.y + 50 < this.enemy.y) {
         this.enemy.destroy()
-    } else{
-        die_sound.play();
-        this.physics.pause();
-        player.setY(this.player.y - 500);
-        lives--
-        livesText.setText('Lifes: ' + lives);
-        // Set velocity back to 0
-        player.setVelocity(0, 0);
-        // Put the player back in its original position
-        player.setX(50);
-        player.setY(525);
-        // Use the default `idle` animation
-        player.play('idle', true);
-        // Set the visibility to 0 i.e. hide the player
-        player.setAlpha(0);
-        // Add a tween that 'blinks' until the player is gradually visible
-        let tw = this.tweens.add({
-            targets: player,
-            alpha: 1,
-            duration: 100,
-            ease: 'Linear',
-            repeat: 5,
-        });
+    } else {
         setTimeout(() => {
-            this.physics.resume();
+            die_sound.play();
+            this.physics.pause();
+            player.setY(this.player.y - 500);
+
+            livesText.setText('Lifes: ' + lives);
+            // Set velocity back to 0
+            player.setVelocity(0, 0);
+            // Put the player back in its original position
+            player.setX(50);
+            player.setY(525);
+            // Use the default `idle` animation
+            player.play('idle', true);
+            // Set the visibility to 0 i.e. hide the player
+            player.setAlpha(0);
+            // Add a tween that 'blinks' until the player is gradually visible
+            let tw = this.tweens.add({
+                targets: player,
+                alpha: 1,
+                duration: 100,
+                ease: 'Linear',
+                repeat: 5,
+            });
+
+
         }, 600);
+        this.physics.resume();
+        lives--
     }
 }
 
 function level1ToLevel2() {
-    if (score >= 3){
+    if (score >= 3) {
         this.scene.start('Scene2');
         fondo.stop();
     }
 }
 
 function level2ToVictory() {
-    if (score >= 7){
+    if (score >= 7) {
         this.scene.start('Scene5');
         fondo2.stop();
     }
 }
-
-
-
 
 
 // Creación del juego
