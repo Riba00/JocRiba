@@ -1,9 +1,7 @@
 import Phaser from 'phaser';
-import logoImg from './assets/logo.png';
 
 let score = 0;
 let scoreText;
-let scoreImage
 let lives = 3;
 let livesText;
 let coin_sound
@@ -157,7 +155,7 @@ class Scene1 extends Phaser.Scene {
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, score.toString(), {
+        scoreText = this.add.text(70, 10, score.toString() + '/3', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -185,7 +183,7 @@ class Scene1 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-            scoreText.setText(score.toString());
+            scoreText.setText(score.toString() + '/3');
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
@@ -374,7 +372,7 @@ class Scene2 extends Phaser.Scene {
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, score.toString(), {
+        scoreText = this.add.text(70, 10, score.toString() + '/7', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -407,7 +405,7 @@ class Scene2 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-            scoreText.setText(score.toString());
+            scoreText.setText(score.toString() + '/7');
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
