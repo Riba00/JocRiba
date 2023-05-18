@@ -180,7 +180,7 @@ class Scene1 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-            scoreText.setText(score.toString());
+            scoreText.setText(score.toString() + '/3');
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
@@ -400,7 +400,7 @@ class Scene2 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-            scoreText.setText(score.toString());
+            scoreText.setText(score.toString() + '/7');
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
