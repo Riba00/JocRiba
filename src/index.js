@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 
 let score = 0;
 let scoreText;
-let scoreImage
 let lives = 3;
 let livesText;
 let coin_sound
@@ -19,22 +18,22 @@ class Scene1 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', 'src/assets/images/background.png');
-        this.load.image('spike', 'src/assets/images/spike.png');
-        this.load.image('seta', 'src/assets/images/seta.png');
-        this.load.image('enemy', 'src/assets/images/enemy.png');
+        this.load.image('background', 'assets/images/background.png');
+        this.load.image('spike', 'assets/images/spike.png');
+        this.load.image('seta', 'assets/images/seta.png');
+        this.load.image('enemy', 'assets/images/enemy.png');
 
         // At last image must be loaded with its JSON
-        this.load.atlas('player', 'src/assets/images/kenney_player.png', 'src/assets/images/kenney_player_atlas.json');
-        this.load.image('tiles', 'src/assets/tilesets/platformPack_tilesheet.png');
+        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
+        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
         // Load the export Tiled JSON
-        this.load.tilemapTiledJSON('map', 'src/assets/tilemaps/level1.json');
+        this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.json');
 
-        this.load.spritesheet('star', 'src/assets/images/star.png', {frameWidth: 48, frameHeight: 48})
+        this.load.spritesheet('star', 'assets/images/star.png', {frameWidth: 48, frameHeight: 48})
 
-        this.load.audio('fondo', 'src/assets/audio/fondo.mp3');
-        this.load.audio('coin_sound', 'src/assets/audio/coin.mp3');
-        this.load.audio('die_sound', 'src/assets/audio/die.mp3');
+        this.load.audio('fondo', 'assets/audio/fondo.mp3');
+        this.load.audio('coin_sound', 'assets/audio/coin.mp3');
+        this.load.audio('die_sound', 'assets/audio/die.mp3');
     }
 
     create() {
@@ -52,10 +51,12 @@ class Scene1 extends Phaser.Scene {
         const platforms = map.createLayer('Platforms', tileset, 0, 200);
 
 
-        fondo = this.sound.add('fondo',);
+        fondo = this.sound.add('fondo',{loop: true});
         fondo.play();
         coin_sound = this.sound.add('coin_sound',);
         die_sound = this.sound.add('die_sound');
+
+
 
 
         // There are many ways to set collision between tiles and players
@@ -80,6 +81,7 @@ class Scene1 extends Phaser.Scene {
 
         this.enemy = this.physics.add.sprite(750, 200, 'enemy')
         this.physics.add.collider(this.enemy, platforms)
+
 
 
         // Add the player to the game world
@@ -149,10 +151,11 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.enemy, playerHit, null, this);
 
 
+
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, score.toString()+'/3', {
+        scoreText = this.add.text(70, 10, score.toString() + '/3', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -163,6 +166,7 @@ class Scene1 extends Phaser.Scene {
 
         livesText = this.add.text(100, 10, 'Lifes: ' + lives, {fontSize: '24px', fill: '#000000'});
         livesText.setScrollFactor(0);
+
 
         this.physics.add.overlap(this.player, this.star1, function (player, star1) {
             incrementScore(star1);
@@ -179,11 +183,7 @@ class Scene1 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-<<<<<<< HEAD
             scoreText.setText(score.toString() + '/3');
-=======
-            scoreText.setText(score.toString()+ '/3');
->>>>>>> prova
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
@@ -238,22 +238,22 @@ class Scene2 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background2', 'src/assets/images/background.png');
-        this.load.image('spike2', 'src/assets/images/spike.png');
-        this.load.image('seta2', 'src/assets/images/seta.png');
-        this.load.image('enemy2', 'src/assets/images/enemy.png');
+        this.load.image('background2', 'assets/images/background.png');
+        this.load.image('spike2', 'assets/images/spike.png');
+        this.load.image('seta2', 'assets/images/seta.png');
+        this.load.image('enemy2', 'assets/images/enemy.png');
 
         // At last image must be loaded with its JSON
-        this.load.atlas('player', 'src/assets/images/kenney_player.png', 'src/assets/images/kenney_player_atlas.json');
-        this.load.image('tiles', 'src/assets/tilesets/platformPack_tilesheet.png');
+        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
+        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
         // Load the export Tiled JSON
-        this.load.tilemapTiledJSON('map2', 'src/assets/tilemaps/level2.json');
+        this.load.tilemapTiledJSON('map2', 'assets/tilemaps/level2.json');
 
-        this.load.spritesheet('star2', 'src/assets/images/star.png', {frameWidth: 48, frameHeight: 48})
+        this.load.spritesheet('star2', 'assets/images/star.png', {frameWidth: 48, frameHeight: 48})
 
-        this.load.audio('fondo2', 'src/assets/audio/fondo2.mp3');
-        this.load.audio('coin_sound', 'src/assets/audio/coin.mp3');
-        this.load.audio('die_sound', 'src/assets/audio/die.mp3');
+        this.load.audio('fondo2', 'assets/audio/fondo2.mp3');
+        this.load.audio('coin_sound', 'assets/audio/coin.mp3');
+        this.load.audio('die_sound', 'assets/audio/die.mp3');
     }
 
     create() {
@@ -296,8 +296,9 @@ class Scene2 extends Phaser.Scene {
         this.physics.add.collider(this.enemy, platforms)
 
         coin_sound = this.sound.add('coin_sound');
-        fondo2 = this.sound.add('fondo2', {loop: true});
+        fondo2 = this.sound.add('fondo2',{loop:true});
         fondo2.play();
+
 
 
         // Add the player to the game world
@@ -367,10 +368,11 @@ class Scene2 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.enemy, playerHit, null, this);
 
 
+
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, score.toString()+'/7', {
+        scoreText = this.add.text(70, 10, score.toString() + '/7', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -403,11 +405,7 @@ class Scene2 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-<<<<<<< HEAD
             scoreText.setText(score.toString() + '/7');
-=======
-            scoreText.setText(score.toString()+'/7');
->>>>>>> prova
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
@@ -461,9 +459,9 @@ class Scene3 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background3', 'src/assets/images/cover.png');
-        this.load.image('startButton', 'src/assets/images/startButton.png');
-        this.load.image('aboutButton', 'src/assets/images/aboutButton.png');
+        this.load.image('background3', 'assets/images/cover.png');
+        this.load.image('startButton', 'assets/images/startButton.png');
+        this.load.image('aboutButton', 'assets/images/aboutButton.png');
     }
 
     create() {
@@ -517,8 +515,8 @@ class Scene4 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background4', 'src/assets/images/gameOver.png');
-        this.load.image('homeButton', 'src/assets/images/homeButton.png');
+        this.load.image('background4', 'assets/images/gameOver.png');
+        this.load.image('homeButton', 'assets/images/homeButton.png');
 
     }
 
@@ -554,8 +552,8 @@ class Scene5 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background5', 'src/assets/images/victory.png');
-        this.load.image('homeButton2', 'src/assets/images/homeButton.png');
+        this.load.image('background5', 'assets/images/victory.png');
+        this.load.image('homeButton2', 'assets/images/homeButton.png');
     }
 
     create() {
@@ -576,6 +574,9 @@ class Scene5 extends Phaser.Scene {
             this.scene.start('Scene3');
             this.input.setDefaultCursor('auto');
         });
+
+
+
 
 
     }
@@ -601,70 +602,70 @@ const config = {
 };
 
 function playerHit(player) {
+
     if (lives === 1) {
         this.scene.start('Scene4');
         try {
             fondo.pause()
-        } catch (e) {
+        }catch (e){
 
         }
         try {
             fondo2.pause()
-        } catch (e) {
+        }catch (e){
 
         }
 
-    } else if (player.y + 50 < this.enemy.y) {
+    } else if (player.y+50 < this.enemy.y){
         this.enemy.destroy()
-    } else {
-        setTimeout(() => {
-            die_sound.play();
-            this.physics.pause();
-            player.setY(this.player.y - 500);
-
-            livesText.setText('Lifes: ' + lives);
-            // Set velocity back to 0
-            player.setVelocity(0, 0);
-            // Put the player back in its original position
-            player.setX(50);
-            player.setY(525);
-            // Use the default `idle` animation
-            player.play('idle', true);
-            // Set the visibility to 0 i.e. hide the player
-            player.setAlpha(0);
-            // Add a tween that 'blinks' until the player is gradually visible
-            let tw = this.tweens.add({
-                targets: player,
-                alpha: 1,
-                duration: 100,
-                ease: 'Linear',
-                repeat: 5,
-            });
-
-
-        }, 600);
-        this.physics.resume();
+    } else{
+        die_sound.play();
+        this.physics.pause();
+        player.setY(this.player.y - 500);
         lives--
+        livesText.setText('Lifes: ' + lives);
+        // Set velocity back to 0
+        player.setVelocity(0, 0);
+        // Put the player back in its original position
+        player.setX(50);
+        player.setY(525);
+        // Use the default `idle` animation
+        player.play('idle', true);
+        // Set the visibility to 0 i.e. hide the player
+        player.setAlpha(0);
+        // Add a tween that 'blinks' until the player is gradually visible
+        let tw = this.tweens.add({
+            targets: player,
+            alpha: 1,
+            duration: 100,
+            ease: 'Linear',
+            repeat: 5,
+        });
+        setTimeout(() => {
+            this.physics.resume();
+        }, 600);
     }
 }
 
 function level1ToLevel2() {
-    if (score >= 3) {
+    if (score >= 3){
         this.scene.start('Scene2');
         fondo.stop();
     }
 }
 
 function level2ToVictory() {
-    if (score >= 7) {
+    if (score >= 7){
         this.scene.start('Scene5');
         fondo2.stop();
     }
 }
 
 
+
+
+
 // Creación del juego
 const game = new Phaser.Game(config);
-
 
 
