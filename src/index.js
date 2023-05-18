@@ -165,7 +165,6 @@ class Scene1 extends Phaser.Scene {
         livesText = this.add.text(100, 10, 'Lifes: ' + lives, {fontSize: '24px', fill: '#000000'});
         livesText.setScrollFactor(0);
 
-
         this.physics.add.overlap(this.player, this.star1, function (player, star1) {
             incrementScore(star1);
         }, null, this);
