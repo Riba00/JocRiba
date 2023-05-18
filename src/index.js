@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import logoImg from './assets/logo.png';
 
 let score = 0;
 let scoreText;
@@ -20,22 +19,22 @@ class Scene1 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', 'assets/images/background.png');
-        this.load.image('spike', 'assets/images/spike.png');
-        this.load.image('seta', 'assets/images/seta.png');
-        this.load.image('enemy', 'assets/images/enemy.png');
+        this.load.image('background', 'src/assets/images/background.png');
+        this.load.image('spike', 'src/assets/images/spike.png');
+        this.load.image('seta', 'src/assets/images/seta.png');
+        this.load.image('enemy', 'src/assets/images/enemy.png');
 
         // At last image must be loaded with its JSON
-        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
-        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
+        this.load.atlas('player', 'src/assets/images/kenney_player.png', 'src/assets/images/kenney_player_atlas.json');
+        this.load.image('tiles', 'src/assets/tilesets/platformPack_tilesheet.png');
         // Load the export Tiled JSON
-        this.load.tilemapTiledJSON('map', 'assets/tilemaps/level1.json');
+        this.load.tilemapTiledJSON('map', 'src/assets/tilemaps/level1.json');
 
-        this.load.spritesheet('star', 'assets/images/star.png', {frameWidth: 48, frameHeight: 48})
+        this.load.spritesheet('star', 'src/assets/images/star.png', {frameWidth: 48, frameHeight: 48})
 
-        this.load.audio('fondo', 'assets/audio/fondo.mp3');
-        this.load.audio('coin_sound', 'assets/audio/coin.mp3');
-        this.load.audio('die_sound', 'assets/audio/die.mp3');
+        this.load.audio('fondo', 'src/assets/audio/fondo.mp3');
+        this.load.audio('coin_sound', 'src/assets/audio/coin.mp3');
+        this.load.audio('die_sound', 'src/assets/audio/die.mp3');
     }
 
     create() {
@@ -157,7 +156,7 @@ class Scene1 extends Phaser.Scene {
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, score.toString(), {
+        scoreText = this.add.text(70, 10, score.toString()+'/3', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -185,7 +184,7 @@ class Scene1 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-            scoreText.setText(score.toString());
+            scoreText.setText(score.toString()+ '/3');
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
@@ -240,22 +239,22 @@ class Scene2 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background2', 'assets/images/background.png');
-        this.load.image('spike2', 'assets/images/spike.png');
-        this.load.image('seta2', 'assets/images/seta.png');
-        this.load.image('enemy2', 'assets/images/enemy.png');
+        this.load.image('background2', 'src/assets/images/background.png');
+        this.load.image('spike2', 'src/assets/images/spike.png');
+        this.load.image('seta2', 'src/assets/images/seta.png');
+        this.load.image('enemy2', 'src/assets/images/enemy.png');
 
         // At last image must be loaded with its JSON
-        this.load.atlas('player', 'assets/images/kenney_player.png', 'assets/images/kenney_player_atlas.json');
-        this.load.image('tiles', 'assets/tilesets/platformPack_tilesheet.png');
+        this.load.atlas('player', 'src/assets/images/kenney_player.png', 'src/assets/images/kenney_player_atlas.json');
+        this.load.image('tiles', 'src/assets/tilesets/platformPack_tilesheet.png');
         // Load the export Tiled JSON
-        this.load.tilemapTiledJSON('map2', 'assets/tilemaps/level2.json');
+        this.load.tilemapTiledJSON('map2', 'src/assets/tilemaps/level2.json');
 
-        this.load.spritesheet('star2', 'assets/images/star.png', {frameWidth: 48, frameHeight: 48})
+        this.load.spritesheet('star2', 'src/assets/images/star.png', {frameWidth: 48, frameHeight: 48})
 
-        this.load.audio('fondo2', 'assets/audio/fondo2.mp3');
-        this.load.audio('coin_sound', 'assets/audio/coin.mp3');
-        this.load.audio('die_sound', 'assets/audio/die.mp3');
+        this.load.audio('fondo2', 'src/assets/audio/fondo2.mp3');
+        this.load.audio('coin_sound', 'src/assets/audio/coin.mp3');
+        this.load.audio('die_sound', 'src/assets/audio/die.mp3');
     }
 
     create() {
@@ -374,7 +373,7 @@ class Scene2 extends Phaser.Scene {
         let scoreImage = this.add.image(10, 10, 'star');
         scoreImage.setOrigin(0, 0);
         scoreImage.setScale(0.5);
-        scoreText = this.add.text(70, 10, score.toString(), {
+        scoreText = this.add.text(70, 10, score.toString()+'/7', {
             fontFamily: 'Arial',
             fontSize: '24px',
             fill: '#000000'
@@ -407,7 +406,7 @@ class Scene2 extends Phaser.Scene {
 
         function incrementScore(sprite) {
             score++;
-            scoreText.setText(score.toString());
+            scoreText.setText(score.toString()+'/7');
             scoreImage.setTexture('star');
             scoreImage.setScale(0.5);
             coin_sound.play();
@@ -461,9 +460,9 @@ class Scene3 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background3', 'assets/images/cover.png');
-        this.load.image('startButton', 'assets/images/startButton.png');
-        this.load.image('aboutButton', 'assets/images/aboutButton.png');
+        this.load.image('background3', 'src/assets/images/cover.png');
+        this.load.image('startButton', 'src/assets/images/startButton.png');
+        this.load.image('aboutButton', 'src/assets/images/aboutButton.png');
     }
 
     create() {
@@ -517,8 +516,8 @@ class Scene4 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background4', 'assets/images/gameOver.png');
-        this.load.image('homeButton', 'assets/images/homeButton.png');
+        this.load.image('background4', 'src/assets/images/gameOver.png');
+        this.load.image('homeButton', 'src/assets/images/homeButton.png');
 
     }
 
@@ -554,8 +553,8 @@ class Scene5 extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background5', 'assets/images/victory.png');
-        this.load.image('homeButton2', 'assets/images/homeButton.png');
+        this.load.image('background5', 'src/assets/images/victory.png');
+        this.load.image('homeButton2', 'src/assets/images/homeButton.png');
     }
 
     create() {
